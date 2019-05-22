@@ -38,6 +38,8 @@ void World::onUpdate()
 {
 	// Update all entities
 	for (int i = 0; i < entity_list.size(); i++) {
-		entity_list.at(i)->onUpdate();
+		if (entity_list.at(i)->enabled) {
+			entity_list.at(i)->onUpdate();
+		}
 	}
 }

@@ -5,8 +5,3 @@ Idea:
 Say we have a ton objects called "bullets" and we want to modify all of them quickly/remove them all quickly
 world.get_group("Bullets"); Would return a list of pointers to all entities "grouped/tagged" as "bullets"
 ]
-
-- Ability to enable/disable enities 
-[
-This would mean they don't get updated when the world gets updated!
-]

@@ -35,6 +35,9 @@
     <ClInclude Include="include\world.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\system.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\entity.inl">

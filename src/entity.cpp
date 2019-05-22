@@ -7,9 +7,10 @@
 
 using namespace squip::ecs;
 
-squip::ecs::Entity::Entity(const std::string & id)
+squip::ecs::Entity::Entity(const std::string & id) 
 {
 	this->id = id;
+	enabled = true;
 }
 
 squip::ecs::Entity::~Entity()

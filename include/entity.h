@@ -50,6 +50,10 @@ public:
 	*/
 	std::string id;
 	/*
+	- Is entity enabled/disabled
+	*/
+	bool enabled;
+	/*
 	- List of all components attatched to entity
 	*/
 	std::vector<std::unique_ptr<Component>> component_list;
