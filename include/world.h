@@ -9,8 +9,8 @@ namespace squip { namespace ecs {
 class Entity;
 class BaseSystem;
 
-struct World {
-
+class World {
+public:
 	/*
 	- Return raw pointer of entity that with id that resides in this world
 	*/
@@ -58,13 +58,22 @@ struct World {
 	- Calls update on all entities in this world
 	*/
 	void onUpdate();
-	
+
+private:
+	/*
+	- Helper method for caching(s)
+	*/
+	void cacheIdToIndex(const std::string& id, int index);
+	void cacheTagToIndex(const std::string& tag, int index);
+
+private:
 	/*
 	- Members
 	*/
 	// Entity related
 	std::vector<std::unique_ptr<Entity>> entity_list;
-	std::map<std::string, int> id_to_index;
+	std::map<std::string, int> id_to_index; // Caching unique name
+	std::map<std::string, std::vector<int>> tag_to_indices; // Caching tags for grouping
 	// System related
 	std::vector<std::unique_ptr<BaseSystem>> system_list;
 	std::map<std::string, int> type_to_index;

@@ -18,7 +18,7 @@ bool World::addEntity(const std::string& id)
 	if (entityExists(id)) return false; // Make sure entity with id doesn't already exists
 
 	entity_list.push_back(std::make_unique<Entity>(id)); // Add unique_ptr<Entity> to entity_list
-	id_to_index.insert(std::pair<std::string, int>(id, entity_list.size()-1)); 	// Cache index of entity with this id
+	cacheIdToIndex(id, entity_list.size() - 1);
 
 	return true;
 }
@@ -50,4 +50,14 @@ void World::onUpdate()
 			entity_list.at(i)->onUpdate();
 		}
 	}
+}
+
+void squip::ecs::World::cacheIdToIndex(const std::string & id, int index)
+{
+	id_to_index.insert(std::pair<std::string, int>(id, entity_list.size() - 1)); // Cache index of entity with this id
+}
+
+void squip::ecs::World::cacheTagToIndex(const std::string & tag, int index)
+{
+	if()
 }

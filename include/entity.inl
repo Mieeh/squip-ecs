@@ -2,7 +2,7 @@
 #pragma once
 
 template<typename _T, typename... _Args>
-inline bool squip::ecs::Entity::addComponet(_Args&&... args)
+inline bool squip::ecs::Entity::addComponet(_Args&&... arg)
 {
 	bool isDerivedFromComponent = std::is_base_of<Component, _T>();
 	if (isDerivedFromComponent && !hasComponent<_T>()) { // Make sure _T is derived correctly + _T doesn't already exists!
@@ -18,7 +18,10 @@ inline bool squip::ecs::Entity::addComponet(_Args&&... args)
 template<typename _T>
 inline _T *squip::ecs::Entity::getComponent()
 {
-	return static_cast<_T*>(component_list.at(typename_to_index.at(typeid(_T).name())).get());
+	if (hasComponent<_T>()) {
+		return static_cast<_T*>(component_list.at(typename_to_index.at(typeid(_T).name())).get());
+	}
+	return nullptr;
 }
 
 template<typename _T>

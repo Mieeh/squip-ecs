@@ -31,7 +31,7 @@ public:
 	- Return false if entity already has component of type _T
 	*/
 	template<typename _T, typename... _Args>
-	bool addComponet(_Args&&... args);
+	bool addComponet(_Args&&... arg);
 
 	/*
 	- 
@@ -49,6 +49,10 @@ public:
 	- Unique identifier id for entity
 	*/
 	std::string id;
+	/*
+	- Non-unique identifier/tag for entity
+	*/
+	std::string tag;
 	/*
 	- Is entity enabled/disabled
 	*/

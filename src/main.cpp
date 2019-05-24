@@ -1,9 +1,6 @@
 #include<iostream>
 
-#include"../include/entity.h"
-#include"../include/component.h"
-#include"../include/system.h"
-#include"../include/world.h"
+#include"../include/squip-ecs.h"
 
 using namespace squip;
 
@@ -40,21 +37,19 @@ public:
 	}
 
 	void onUpdate() override {
-		tyler->getComponent<Transform>()->foo++;
+		std::cout << "Input System Updated" << std::endl;
 	}
 };
 
 int main() {
 
+	std::cout << ecs::getVersionString() << std::endl;
+
 	ecs::World world;
 	
 	world.addEntity("tyler");
 	ecs::Entity* entity = world.getEntity("tyler");
-	entity->addComponet<Transform>();
-
-	std::cout << "has syste: " << world.hasSystem<InputSystem>();
-	world.getSystem<InputSystem>()->rankmebitch();
-	std::cout << "has syste: " << world.hasSystem<InputSystem>();
+	entity->addComponet<Transform>(3, 3, 3);
 
 	// Simulate the world 10 times
 	for (int i = 0; i < 10; i++) {

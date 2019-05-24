@@ -21,8 +21,11 @@ inline bool squip::ecs::World::addSystem()
 template<typename _T>
 inline _T * squip::ecs::World::getSystem()
 {
-	// Return system using cached typename
-	return static_cast<_T*>(system_list.at(type_to_index.at(typeid(_T).name())).get());
+	if (hasSystem<_T>()) {
+		// Return system using cached typename
+		return static_cast<_T*>(system_list.at(type_to_index.at(typeid(_T).name())).get());
+	}
+	return nullptr;
 }
 
 template<typename _T>

@@ -11,6 +11,7 @@ squip::ecs::Entity::Entity(const std::string & id)
 {
 	this->id = id;
 	enabled = true;
+	tag = "none";
 }
 
 squip::ecs::Entity::~Entity()
