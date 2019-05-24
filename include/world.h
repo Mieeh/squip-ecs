@@ -7,6 +7,7 @@
 namespace squip { namespace ecs { 
 
 class Entity;
+class BaseSystem;
 
 struct World {
 
@@ -33,6 +34,27 @@ struct World {
 	bool entityExists(const std::string& id); 
 
 	/*
+	- Add system of type _T to this world
+	- Also makes sure the system is correctly setup
+	- _T has to inherit from squip::ecs::BaseSystem
+	- World can't have multipile system instances of the same type _T 
+	*/
+	template<typename _T>
+	bool addSystem();
+
+	/*
+	- Returns system of type _T attached to this world
+	*/
+	template<typename _T>
+	_T* getSystem();
+
+	/*
+	- Return true if world has a system of type _T
+	*/
+	template<typename _T>
+	bool hasSystem();
+
+	/*
 	- Calls update on all entities in this world
 	*/
 	void onUpdate();
@@ -40,8 +62,14 @@ struct World {
 	/*
 	- Members
 	*/
+	// Entity related
 	std::vector<std::unique_ptr<Entity>> entity_list;
 	std::map<std::string, int> id_to_index;
+	// System related
+	std::vector<std::unique_ptr<BaseSystem>> system_list;
+	std::map<std::string, int> type_to_index;
 };
+
+#include"world.inl"
 
 }} 

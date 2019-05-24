@@ -1,6 +1,7 @@
 #include "../include/world.h"
 
 #include"../include/entity.h"
+#include"../include/system.h"
 
 #include<algorithm>
 #include<string>
@@ -36,6 +37,13 @@ bool squip::ecs::World::entityExists(const std::string & id)
 
 void World::onUpdate()
 {
+	// Update all systems
+	for (int i = 0; i < system_list.size(); i++) {
+		if (system_list.at(i).get()->enabled) {      
+			system_list.at(i).get()->onUpdate();
+		}
+	}
+
 	// Update all entities
 	for (int i = 0; i < entity_list.size(); i++) {
 		if (entity_list.at(i)->enabled) {

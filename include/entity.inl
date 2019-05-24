@@ -9,6 +9,7 @@ inline bool squip::ecs::Entity::addComponet(_Args&&... args)
 		component_list.push_back(std::unique_ptr<_T>(new _T(std::forward<_Args>(arg)...)));
 		// Cache typename
 		typename_to_index.insert(std::pair<std::string, int>(typeid(_T).name(), component_list.size() - 1));
+		return true;
 	}
 
 	return false;

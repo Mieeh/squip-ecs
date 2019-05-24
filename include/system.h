@@ -1,17 +1,31 @@
 #pragma once
 
-#include<memory>
-
 namespace squip { namespace ecs { 
 
 	struct World;
 
 	class BaseSystem {
+		friend struct World;
 	public:
-		virtual void onUpdate() = 0;
+		/*
+		- Called on world update
+		*/
+		virtual void onUpdate() { }
+
+		/*
+		- Called when added to a world
+		*/
+		virtual void onAdd() { }
 
 	protected:
-		std::unique_ptr<World> world;
+		/*
+		- world this system is attached to 
+		*/
+		World* world;
+		/*
+		- Determines if the system gets update by the world
+		*/
+		bool enabled = true;
 	};
 
 } } 
