@@ -1,0 +1,6 @@
+﻿
+done ✓
+cancelled ⊗
+current « »
+
+- Move all of include's content into squip-ecs folder!

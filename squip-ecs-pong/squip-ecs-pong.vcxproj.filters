@@ -315,6 +315,9 @@
     <ClInclude Include="game\Paddle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="game\game_system.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="sfml\SFML-2.5.1\include\SFML\Audio\SoundFileFactory.inl">
@@ -347,6 +350,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="game\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\Ball.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="game\Paddle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

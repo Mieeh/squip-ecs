@@ -127,6 +127,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="game\Ball.h" />
+    <ClInclude Include="game\game_system.h" />
     <ClInclude Include="game\Paddle.h" />
     <ClInclude Include="sfml\SFML-2.5.1\include\SFML\Audio.hpp" />
     <ClInclude Include="sfml\SFML-2.5.1\include\SFML\Audio\AlResource.hpp" />
@@ -239,7 +240,9 @@
     <None Include="sfml\SFML-2.5.1\include\SFML\System\Vector3.inl" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="game\Ball.cpp" />
     <ClCompile Include="game\main.cpp" />
+    <ClCompile Include="game\Paddle.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

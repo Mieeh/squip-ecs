@@ -31,7 +31,7 @@ Entity* World::addEntity(const std::string& id)
 
 void squip::ecs::World::removeEntity(const std::string& id)
 {
-	entity_list.erase(std::remove_if(entity_list.begin(), entity_list.end(), 
+	entity_list.erase(std::remove_if(entity_list.begin(), entity_list.end(),
 		[id](auto const& entity) { return (entity.get()->id == id); }), entity_list.end()); // Removes entity with id from list
 	id_to_index.erase(id); // Remove entry from the id_to_index map
 }

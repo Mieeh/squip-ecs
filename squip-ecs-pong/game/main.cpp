@@ -12,9 +12,7 @@ Game related headers & macros
 */
 #include"Paddle.h" // Component
 #include"Ball.h" // Component
-
-#define WIDTH 700
-#define HEIGHT 700
+#include"game_system.h" // System
 
 int main() {
 	// Setup sfml window
@@ -25,17 +23,10 @@ int main() {
 
 	// Create world & entities
 	ecs::World world;
-	
-	/* Add paddles */
-	world.addEntity("left_paddle");
-	world.getEntity("left_paddle")->addComponet<Paddle>(window, 10, sf::Keyboard::Key::W, sf::Keyboard::Key::S);
-	
-	world.addEntity("right_paddle");
-	world.getEntity("right_paddle")->addComponet<Paddle>(window, WIDTH-Paddle::paddle_size.x-10, sf::Keyboard::Key::Up, sf::Keyboard::Key::Down);
 
-	/* Add ball */
-	world.addEntity("ball");
-	world.getEntity("ball")->addComponet<Ball>(window, world.getEntity("left_paddle"), world.getEntity("right_paddle"));
+	world.addSystem<GameSystem>();
+	world.getSystem<GameSystem>()->window = window;
+	world.getSystem<GameSystem>()->startGame();
 
 	while (window->isOpen()) {
 		sf::Event event;
@@ -43,11 +34,22 @@ int main() {
 			if (event.type == sf::Event::Closed) { 
 				window->close();
 			}
+			if (event.type == sf::Event::KeyPressed) {
+				if (event.key.code == sf::Keyboard::X) {
+					world.getSystem<GameSystem>()->startGame(); // Restarts the game
+				}
+				if (event.key.code == sf::Keyboard::C) {
+					world.getSystem<GameSystem>()->addBall();
+				}
+				if (event.key.code == sf::Keyboard::Z) {
+					std::cout << "STOP!" << std::endl;
+				}
+			}
 		}
 
 		window->clear(sf::Color::Black);
 
-		world.onUpdate(); // Update all game entities
+		world.onUpdate(); // Update all game entities & systems
 
 		window->display();
 	}
