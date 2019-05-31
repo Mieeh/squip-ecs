@@ -3,7 +3,7 @@
 #include<SFML/Window.hpp>
 #include<SFML/Graphics.hpp>
 
-#include<squip-ecs.h>
+#include<squip-ecs/squip-ecs.h>
 
 using namespace squip;
 
@@ -17,7 +17,7 @@ Game related headers & macros
 int main() {
 	// Setup sfml window
 	sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(WIDTH, HEIGHT), "squip::ecs Game!");
-	window->setFramerateLimit(60);
+	window->setFramerateLimit(120);
 
 	srand(time(NULL));
 
@@ -28,7 +28,18 @@ int main() {
 	world.getSystem<GameSystem>()->window = window;
 	world.getSystem<GameSystem>()->startGame();
 
+	sf::Clock clock;
+	clock.restart();
+	int fps = 0;
+
 	while (window->isOpen()) {
+
+		if (clock.getElapsedTime().asSeconds() >= 1.0f) {
+			clock.restart();
+			std::cout << fps << std::endl;
+			fps = 0;
+		}
+
 		sf::Event event;
 		while (window->pollEvent(event)) {
 			if (event.type == sf::Event::Closed) { 
@@ -52,6 +63,8 @@ int main() {
 		world.onUpdate(); // Update all game entities & systems
 
 		window->display();
+
+		fps++;
 	}
 
 	return 0;

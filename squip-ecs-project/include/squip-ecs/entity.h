@@ -66,7 +66,7 @@ public:
 	*/
 	std::map<std::string, int> typename_to_index;
 
-private:
+public:
 	/*
 	- Destructor
 	*/

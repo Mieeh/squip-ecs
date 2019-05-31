@@ -15,27 +15,27 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\component.h">
+    <ClInclude Include="include\squip-ecs\component.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\entity.h">
+    <ClInclude Include="include\squip-ecs\entity.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\squip-ecs.h">
+    <ClInclude Include="include\squip-ecs\squip-ecs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\system.h">
+    <ClInclude Include="include\squip-ecs\system.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\world.h">
+    <ClInclude Include="include\squip-ecs\world.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="include\entity.inl">
+    <None Include="include\squip-ecs\world.inl">
       <Filter>Header Files</Filter>
     </None>
-    <None Include="include\world.inl">
+    <None Include="include\squip-ecs\entity.inl">
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>

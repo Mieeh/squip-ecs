@@ -126,15 +126,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="include\component.h" />
-    <ClInclude Include="include\entity.h" />
-    <ClInclude Include="include\squip-ecs.h" />
-    <ClInclude Include="include\system.h" />
-    <ClInclude Include="include\world.h" />
+    <ClInclude Include="include\squip-ecs\component.h" />
+    <ClInclude Include="include\squip-ecs\entity.h" />
+    <ClInclude Include="include\squip-ecs\squip-ecs.h" />
+    <ClInclude Include="include\squip-ecs\system.h" />
+    <ClInclude Include="include\squip-ecs\world.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="include\entity.inl" />
-    <None Include="include\world.inl" />
+    <None Include="include\squip-ecs\entity.inl" />
+    <None Include="include\squip-ecs\world.inl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\component.cpp" />

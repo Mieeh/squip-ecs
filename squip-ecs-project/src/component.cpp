@@ -1,3 +1,3 @@
-#include"../include/component.h"
+#include"../include/squip-ecs/component.h"
 
-#include"../include/entity.h"
+#include"../include/squip-ecs/entity.h"

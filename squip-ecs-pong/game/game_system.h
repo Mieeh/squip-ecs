@@ -1,6 +1,6 @@
 #pragma once
 
-#include<squip-ecs.h>
+#include<squip-ecs/squip-ecs.h>
 #include<SFML\Graphics.hpp>
 
 /*
@@ -40,7 +40,6 @@ public:
 			world->removeEntity("ball" + std::to_string(i));
 		}
 
-		numberOfBalls = 0;
 		// Remove game entities if they exist
 		world->removeEntity("left_paddle");
 		world->removeEntity("right_paddle");
@@ -49,12 +48,16 @@ public:
 		/* Add paddles */
 		world->addEntity("left_paddle");
 		world->getEntity("left_paddle")->addComponet<Paddle>(window, 10, sf::Keyboard::Key::W, sf::Keyboard::Key::S);
-
+		
 		world->addEntity("right_paddle");
 		world->getEntity("right_paddle")->addComponet<Paddle>(window, WIDTH - Paddle::paddle_size.x - 10, sf::Keyboard::Key::Up, sf::Keyboard::Key::Down);
 
 		/* Add ball */
-		addBall();
+		numberOfBalls = 0;
+
+		for (int i = 1; i < 2000; i++) {
+			addBall();
+		}
 
 		// Start score
 		score = sf::Vector2i(0, 0);

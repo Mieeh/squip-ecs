@@ -1,7 +1,7 @@
-#include"../include/entity.h"
+#include"../include/squip-ecs/entity.h"
 
-#include"../include/component.h"
-#include"../include/world.h"
+#include"../include/squip-ecs/component.h"
+#include"../include/squip-ecs/world.h"
 
 #include<iostream>
 #include<string>

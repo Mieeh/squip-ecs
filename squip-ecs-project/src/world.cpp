@@ -1,10 +1,11 @@
-#include "../include/world.h"
+#include "../include/squip-ecs/world.h"
 
-#include"../include/entity.h"
-#include"../include/system.h"
+#include"../include/squip-ecs/entity.h"
+#include"../include/squip-ecs/system.h"
 
 #include<algorithm>
 #include<string>
+#include<functional>
 
 using namespace squip::ecs;
 
@@ -80,11 +81,12 @@ void World::onUpdate()
 	}
 
 	// Update all entities
-	for (int i = entity_list.size()-1; i >= 0; i--) {
-		if (entity_list.at(i)->enabled) {
-			entity_list.at(i)->onUpdate();
-		}
-	}
+	//for (int i = entity_list.size()-1; i >= 0; i--) {
+	//	if (entity_list.at(i)->enabled) {
+	//		entity_list.at(i)->onUpdate();
+	//	}
+	//}
+	std::for_each(entity_list.begin(), entity_list.end(), std::bind(&Entity::onUpdate, std::placeholders::_1));
 }
 
 inline void squip::ecs::World::cacheIdToIndex(const std::string & id, int index)

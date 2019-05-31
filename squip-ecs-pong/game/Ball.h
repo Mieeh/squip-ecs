@@ -4,7 +4,7 @@
 
 #include<SFML\Graphics.hpp>
 
-#include<squip-ecs.h>
+#include<squip-ecs/squip-ecs.h>
 
 using namespace squip;
 
@@ -34,6 +34,8 @@ public:
 	void onAdd() override;
 
 	void onUpdate() override;
+
+	void scored();
 
 	void bounceOnPaddle() {
 		velocity.x *= -1;

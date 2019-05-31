@@ -1,6 +1,6 @@
 #pragma once
 
-#include<squip-ecs.h>
+#include<squip-ecs/squip-ecs.h>
 #include<SFML\Window.hpp>
 #include<SFML\Graphics.hpp>
 
