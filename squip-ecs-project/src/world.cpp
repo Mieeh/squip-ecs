@@ -16,9 +16,9 @@ squip::ecs::World::~World()
 }
 
 Entity* World::getEntity(const std::string& id)
-{
+{   
 	return entity_list.at(id_to_index.at(id)).get(); // Return entity using cached index position for given id
-}
+}   
 
 Entity* World::addEntity(const std::string& id)
 {
@@ -30,11 +30,18 @@ Entity* World::addEntity(const std::string& id)
 	return entity_list.back().get();
 }
 
-void squip::ecs::World::removeEntity(const std::string& id)
+void squip::ecs::World::removeEntityImediate(const std::string& id)
 {
 	entity_list.erase(std::remove_if(entity_list.begin(), entity_list.end(),
 		[id](auto const& entity) { return (entity.get()->id == id); }), entity_list.end()); // Removes entity with id from list
 	id_to_index.erase(id); // Remove entry from the id_to_index map
+}
+
+void squip::ecs::World::removeEntityNextUpdate(const std::string & id)
+{
+	if (std::find(remove_list.begin(), remove_list.end(), id) == remove_list.end()) {
+		remove_list.push_back(id);
+	}
 }
 
 void squip::ecs::World::clearWorld()
@@ -73,6 +80,12 @@ bool squip::ecs::World::entityExists(const std::string & id)
 
 void World::onUpdate()
 {
+	// Remove all entities to be removed
+	while (!remove_list.empty()) {
+		removeEntityImediate(remove_list.back());
+		remove_list.pop_back();
+	}
+
 	// Update all systems
 	for (int i = system_list.size()-1; i >= 0; i--) {
 		if (system_list.at(i).get()->enabled) {      
@@ -81,12 +94,12 @@ void World::onUpdate()
 	}
 
 	// Update all entities
-	//for (int i = entity_list.size()-1; i >= 0; i--) {
-	//	if (entity_list.at(i)->enabled) {
-	//		entity_list.at(i)->onUpdate();
-	//	}
-	//}
-	std::for_each(entity_list.begin(), entity_list.end(), std::bind(&Entity::onUpdate, std::placeholders::_1));
+	for (int i = entity_list.size()-1; i >= 0; i--) {
+		if (entity_list.at(i)->enabled) {
+			entity_list.at(i)->onUpdate();
+		}
+	}
+	//std::for_each(entity_list.begin(), entity_list.end(), std::bind(&Entity::onUpdate, std::placeholders::_1));
 }
 
 inline void squip::ecs::World::cacheIdToIndex(const std::string & id, int index)

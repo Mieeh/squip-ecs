@@ -30,9 +30,13 @@ public:
 	Entity* addEntity(const std::string& id);
 
 	/*
-	- Removes entity with id from this world
+	- Removes entity with id from this world imediatly
 	*/
-	void removeEntity(const std::string& id);
+	void removeEntityImediate(const std::string& id);
+	/*
+	- Tag entity to be removed before next update step
+	*/
+	void removeEntityNextUpdate(const std::string& id);
 	/*
 	- Makes the world empty and fresh
 	- removes all entities and systems
@@ -104,6 +108,7 @@ private:
 	// System related
 	std::vector<std::unique_ptr<BaseSystem>> system_list;
 	std::map<std::string, int> type_to_index;
+	std::deque<std::string> remove_list;
 };
 
 #include"world.inl"

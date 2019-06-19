@@ -32,25 +32,26 @@ void Ball::onAdd() {
 
 void Ball::onUpdate()
 {
+	shape.move(velocity);
 	// Move ball
 #define MAX_VEL 7
+	
 	if (velocity.x >= MAX_VEL) {
 		velocity.x = MAX_VEL;
 	}
 	if (velocity.y >= MAX_VEL) {
 		velocity.y = MAX_VEL;
 	}
-	shape.move(velocity);
 
 	// Collision with paddles
-	//sf::FloatRect rect = left_paddle->getComponent<Paddle>()->shape.getGlobalBounds();
-	//if (rect.intersects(shape.getGlobalBounds())) {
-	//	bounceOnPaddle();
-	//}
-	//rect = right_paddle->getComponent<Paddle>()->shape.getGlobalBounds();
-	//if (rect.intersects(shape.getGlobalBounds())) {
-	//	bounceOnPaddle();
-	//}
+	sf::FloatRect rect = left_paddle->getComponent<Paddle>()->shape.getGlobalBounds();
+	if (rect.intersects(shape.getGlobalBounds())) {
+		bounceOnPaddle();
+	}
+	rect = right_paddle->getComponent<Paddle>()->shape.getGlobalBounds();
+	if (rect.intersects(shape.getGlobalBounds())) {
+		bounceOnPaddle();
+	}
 
 	// OOB
 	if (shape.getPosition().y < 0) {
@@ -66,14 +67,14 @@ void Ball::onUpdate()
 	if (shape.getPosition().x < -radius * 2) {
 		//sresetBall();
 		//sgame_system->score.y++;
-		//sscored();
+		scored();
 		velocity.x *= -1;
 		velocity *= velocity_factor;
 	}
 	else if (shape.getPosition().x > renderWindow->getSize().x) {
 		//resetBall();
 		//game_system->score.x++;
-		//scored();
+		scored();
 		velocity.x *= -1;
 		velocity *= velocity_factor;
 	}
@@ -85,14 +86,19 @@ void Ball::onUpdate()
 void Ball::scored()
 {
 	if (game_system->numberOfBalls > 1) {
-
+		entity->world->removeEntityNextUpdate(entity->id);
+		game_system->numberOfBalls--;
+		//std::cout << "Remove ball" << std::endl;
 	}
 }
 
 void Ball::resetBall()
 {
+	float x = rand() % renderWindow->getSize().x;
+	float y = rand() % renderWindow->getSize().y;
 	// Reset position and velocity
-	shape.setPosition(sf::Vector2f(renderWindow->getSize().x / 2, renderWindow->getSize().y / 2));
+	shape.setPosition({ x, y });
+	//shape.setPosition(sf::Vector2f(renderWindow->getSize().x / 2, renderWindow->getSize().y / 2));
 
 	// Velocity for the ball
 	float angle = rand() % 360;

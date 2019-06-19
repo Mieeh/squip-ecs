@@ -11,8 +11,8 @@
 
 using namespace squip;
 
-#define WIDTH 800
-#define HEIGHT 600
+#define WIDTH 1200
+#define HEIGHT 900
 
 class GameSystem : public ecs::BaseSystem {
 public:
@@ -37,12 +37,12 @@ public:
 
 	void startGame() {
 		for (int i = 1; i <= numberOfBalls; i++) {
-			world->removeEntity("ball" + std::to_string(i));
+			world->removeEntityImediate("ball" + std::to_string(i));
 		}
 
 		// Remove game entities if they exist
-		world->removeEntity("left_paddle");
-		world->removeEntity("right_paddle");
+		world->removeEntityImediate("left_paddle");
+		world->removeEntityImediate("right_paddle");
 
 		// Populate world with all game entities
 		/* Add paddles */
@@ -55,7 +55,7 @@ public:
 		/* Add ball */
 		numberOfBalls = 0;
 
-		for (int i = 1; i < 2000; i++) {
+		for (int i = 1; i < 1000; i++) {
 			addBall();
 		}
 

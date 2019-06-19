@@ -14,12 +14,29 @@ Game related headers & macros
 #include"Ball.h" // Component
 #include"game_system.h" // System
 
+#include<fstream>
+
+struct SaveData {
+	int someIntegerData;
+	float someFloatData;
+	std::string someStringData;
+};
+
+void writeToBinaryFile(std::string file, const SaveData& saveData); 
+void readFromBinaryFile(std::string file, SaveData& saveData);
+
 int main() {
 	// Setup sfml window
 	sf::RenderWindow* window = new sf::RenderWindow(sf::VideoMode(WIDTH, HEIGHT), "squip::ecs Game!");
-	window->setFramerateLimit(120);
+	window->setFramerateLimit(60);
 
 	srand(time(NULL));
+
+	SaveData saveData{ 30, 3.14159f, "starlord dave" };
+	writeToBinaryFile("save.bat", saveData);
+
+	SaveData loadData;
+	readFromBinaryFile("save.bat", loadData);
 
 	// Create world & entities
 	ecs::World world;
@@ -68,4 +85,20 @@ int main() {
 	}
 
 	return 0;
+}
+
+void writeToBinaryFile(std::string file, const SaveData& saveData) 
+{
+	std::ofstream ofile(file, std::ios::binary);
+	ofile.write((char*)&saveData.someIntegerData, sizeof(saveData.someIntegerData));
+	ofile.write((char*)&saveData.someFloatData, sizeof(saveData.someFloatData));
+	ofile.write((char*)&saveData.someStringData, sizeof(saveData.someStringData));
+}
+
+void readFromBinaryFile(std::string file, SaveData& saveData)
+{
+	std::ifstream ifile(file, std::ios::binary);
+	ifile.read((char*)&saveData.someIntegerData, sizeof(int));
+	ifile.read((char*)&saveData.someFloatData, sizeof(float));
+	ifile.read((char*)&saveData.someStringData, sizeof(std::string));
 }

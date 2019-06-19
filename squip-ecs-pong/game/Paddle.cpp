@@ -37,5 +37,5 @@ void Paddle::onUpdate()
 	}
 
 	// Render
-	renderWindow->draw(shape);
+	//renderWindow->draw(shape);
 }

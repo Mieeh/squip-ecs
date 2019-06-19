@@ -5,6 +5,7 @@
 
 #include<iostream>
 #include<string>
+#include<functional>
 
 using namespace squip::ecs;
 
@@ -30,4 +31,5 @@ void squip::ecs::Entity::onUpdate()
 	for (int i = 0; i < component_list.size(); i++) {
 		component_list.at(i).get()->onUpdate();
 	}
+	//std::for_each(component_list.begin(), component_list.end(), std::bind(&Component::onUpdate, std::placeholders::_1));
 }
